@@ -1,0 +1,11 @@
+[package]
+name = "poth_platformer"
+version = "0.1.0"
+authors = ["maix"]
+edition = "2018"
+
+[profile.dev]
+opt-level = 2
+
+[dependencies]
+ggez = "0.4.4"

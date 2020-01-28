@@ -8,4 +8,21 @@ edition = "2018"
 opt-level = 2
 
 [dependencies]
+# Main framework
 ggez = "0.5.1"
+
+# Load settings
+serde = { version = "1.0.104" , features = ["derive"] }
+serde_yaml = "0.8"
+
+# Glue for ImGui
+gfx_core = "0.9"
+gfx_device_gl = "0.16"
+
+imgui = "0.2.0"
+imgui-gfx-renderer = "0.2.0"
+
+# Parse Hackerman.gif
+# image = "0.2.1"
+
+tiled = "0.8.1"

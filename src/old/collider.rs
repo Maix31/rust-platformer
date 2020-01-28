@@ -1,10 +1,100 @@
 use crate::player::Player;
 use crate::tilemap::TileMap;
 
-// left
-// bottom
-// right
-// top
+use ggez::graphics;
+use ggez::nalgebra as na;
+
+struct KinematicBody {
+    velocity: na::Vector2<f32>,
+    rect: graphics::Rect,
+    rect_old: graphics::Rect,
+    jumping: bool,
+    time_since_last_jump: f32,
+}
+
+impl KinematicBody {
+    pub fn new(x: f32, y: f32,rect: graphics::Rect) -> KinematicBody {
+        KinematicBody {
+            velocity: na::zero(),
+            rect:     rect,
+            rect_old: rect,
+            jumping:  false,
+            time_since_last_jump: 0.0,
+        }
+    }
+
+    fn top(&self) -> f32 {
+        self.rect.y
+    }
+
+    fn right(&self) -> f32 {
+        self.rect.x + self.rect.w
+    }
+
+    fn bottom(&self) -> f32 {
+        self.rect.y + self.rect.h
+    }
+
+    fn left(&self) -> f32 {
+        self.rect.x
+    }
+
+    fn set_top(&mut self, top: f32) {
+        self.rect.y = top;
+    }
+
+    fn set_right(&mut self, right: f32) {
+        self.rect.x = right - self.rect.w;
+    }
+
+    fn set_bottom(&mut self, bottom: f32) {
+        self.rect.y = bottom - self.rect.h;
+    }
+
+    fn set_left(&mut self, left: f32) {
+        self.rect.x = left;
+    }
+
+    fn top_left(&self) -> (f32, f32) {
+        (self.left(), self.top())
+    }
+
+    fn top_right(&self) -> (f32, f32) {
+        (self.right(), self.top())
+    }
+
+    fn bottom_right(&self) -> (f32, f32) {
+        (self.right(), self.bottom())
+    }
+
+    fn bottom_left(&self) -> (f32, f32) {
+        (self.left(), self.bottom())
+    }
+
+    pub fn move_left(&mut self) {
+        self.velocity.x -= crate::PLAYER_VELOCITY.0;
+    }
+
+    pub fn move_right(&mut self) {
+        self.velocity.x += crate::PLAYER_VELOCITY.0;
+    }
+
+    pub fn jump(&mut self) {
+        if !self.jumping {
+            self.jumping = true;
+            self.velocity.y -= crate::PLAYER_VELOCITY.1;
+        }
+    }
+
+    pub fn update(&mut self, _dt: f32) {
+
+        self.rect_old = self.rect;
+
+        self.rect.x += self.velocity.x;
+        self.rect.y += self.velocity.y;
+    }
+}
+
 pub struct ColliderEdge(bool,bool,bool,bool);
 
 impl ColliderEdge {

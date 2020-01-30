@@ -3,18 +3,18 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize)]
 pub struct Settings {
-    CAMERA_DIMENSIONS: (i32, i32),
-    SCREEN_WIDTH: u32,
-    SCREEN_HEIGHT: u32,
-    GAME_WIDTH: u32,
-    GAME_HEIGHT: u32,
-    PLAYER_DIMENSIONS: (f32, f32),
-    PLAYER_VELOCITY: (f32, f32),
-    PLAYER_VELOCITY_MAX: (f32, f32),
-    JUMP_COOLDOWN: f32,
-    IN_AIR_PENALTY_X: f32,
-    GRAVITY_Y: f32,
-    DRAG_COEFFICIENT: (f32, f32),
+    pub CAMERA_DIMENSIONS: (i32, i32),
+    pub SCREEN_WIDTH: u32,
+    pub SCREEN_HEIGHT: u32,
+    pub GAME_WIDTH: u32,
+    pub GAME_HEIGHT: u32,
+    pub PLAYER_DIMENSIONS: (f32, f32),
+    pub PLAYER_VELOCITY: (f32, f32),
+    pub PLAYER_VELOCITY_MAX: (f32, f32),
+    pub JUMP_COOLDOWN: f32,
+    pub IN_AIR_PENALTY_X: f32,
+    pub GRAVITY_Y: f32,
+    pub DRAG_COEFFICIENT: (f32, f32),
 }
 
 impl Settings {

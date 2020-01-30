@@ -100,7 +100,7 @@ impl SceneStack {
         assert!(scenes.len() > 0);
         if let Some((current, rest)) = scenes.split_last_mut() {
             if current.draw_previous() {
-                SceneStack::draw_scenes(rest, world, ctx);
+                SceneStack::draw_scenes(rest, world, ctx)?;
             }
             current.draw(world, ctx)
         } else {
@@ -111,5 +111,13 @@ impl SceneStack {
     /// Draw the current scene.
     pub fn draw(&mut self, state: &mut GlobalState, ctx: &mut ggez::Context) -> GameResult<()> {
         SceneStack::draw_scenes(&mut self.scenes, state, ctx)
+    }
+
+    pub fn len(&self) -> usize {
+        self.scenes.len()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.scenes.is_empty()
     }
 }

@@ -91,7 +91,7 @@ impl ImGuiWrapper {
         }
     }
 
-    pub fn draw(&mut self, ctx: &mut Context, hidpi_factor: f32) {
+    pub fn draw(&mut self,state: &mut GlobalState, ctx: &mut Context, hidpi_factor: f32) {
         // Create new frame
         let now = Instant::now();
         let delta = now - self.last_frame;
@@ -139,7 +139,7 @@ impl ImGuiWrapper {
 
               if ui.small_button(im_str!("Let's Play")) {
                 println!("Small button clicked");
-                switch_state = Some(SceneSwitch::Push(GameScene::new(ctx)));
+                switch_state = Some(SceneSwitch::Push(GameScene::new(state, ctx).expect("To be able to load GameScene.")));
               }
             });
             self.switch_state = switch_state;

@@ -26,14 +26,14 @@ impl Scene for MenuScene {
         state: &mut GlobalState,
         ctx: &mut Context,
     ) -> GameResult<Option<SceneSwitch>> {
-        if state.input.key_pressed(ctx, KeyCode::Escape) {
+        if state.input.key_released(KeyCode::Escape) {
             return Ok(Some(SceneSwitch::Pop))
         }
         self.imgui.update(state, ctx)
     }
 
-    fn draw(&mut self, _state: &mut GlobalState, ctx: &mut Context) -> GameResult<()> {
-        self.imgui.draw(ctx, 1.0);
+    fn draw(&mut self, state: &mut GlobalState, ctx: &mut Context) -> GameResult<()> {
+        self.imgui.draw(state, ctx, 1.0);
         Ok(())
     }
 
